@@ -19,42 +19,34 @@ var omdb = keys.omdb;
 // global variable for indicator
 var indicator = process.argv;
 
-//___________  LOG Function  ____________________________________
 
-// var writeToLog = function(data) {
-//     fs.appendFile("log.txt", '\r\n\r\n');
-
-//     fs.appendFile("log.txt", JSON.stringify(data), function(err) {
-//         if (err) {
-//             return console.log(err);
-//         }
-
-//         console.log("log.txt was updated!");
-//     });
-// }
 
 //__________  SWITCH ___________________________________________
-
+function whatyoudoing(){
 switch (indicator[2]) {
 
     // Gets list of tweets.
     case "my-tweets":
         getMyTweets();
+        
         break;
 
         // Gets Song info 
     case "spotify-this-song":
         songLookup();
+        
         break;
 
         // Gets movieTitle information.
     case "movie-this":
         getmovieTitleInfo();
+        
         break;
 
         // Gets text inside file, and uses it to do something.
     case "do-what-it-says":
         doWhatItSays();
+        
         break;
 
         // LIRI Instructions displayed in terminal to the user
@@ -66,7 +58,8 @@ switch (indicator[2]) {
             "4. do-what-it-says." + "\r\n" +
             "Be sure to put the movie or song name in quotation marks if it's more than one word.")
 }
-
+}
+whatyoudoing();
 
 //_______________  TWITTER Function ___________________________________________
 
@@ -80,9 +73,17 @@ function getMyTweets() {
                 console.log("------------------------------ " + "\r\n" +
                     "@" + tweets[i].user.screen_name + ": " +
                     tweets[i].text + "\r\n" +
-                    //moment(tweets[i].created_at).format('LLL') + "\r\n"
                     tweets[i].created_at + "\r\n"
                 );
+                //Creates variable to log into log.txt
+                let twitterLog = tweets[i].user.screen_name+ '\r\n' + 'Tweet: ' + tweets[i].created_at + '\r\n' + 'Tweet Text: ' + tweets[i].text + '\r\n*********************\r\n';
+
+                //Appends txt to log.txt
+                fs.appendFile('log.txt', twitterLog, function (err) {
+                    if (err) throw err;
+                });
+                console.log("Saved tweets into log.txt");
+
                 //breaking out of the loop at the 20th tweet
                 if (i == 19) {
                     break;
@@ -109,10 +110,10 @@ function songLookup() {
         //Give user song "The Sign" if left empty    
     } else {
         console.log("You didn't enter a song.");
-        break;
+        
     }
 
-    spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
+    spotify.search({ type: 'track', query: song}, function(err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
@@ -122,41 +123,51 @@ function songLookup() {
             console.log("Sorry, no results found!..Try another song");
         }
 
-        let TrackSearchResult = data.tracks.items
-        for (let i = 0; i < TrackSearchResult.length; i++) {
-            console.log("*************************************************")
-            console.log("Artist: " + JSON.stringify(TrackSearchResult[i].artists[0].name));
-            console.log("Song: " + JSON.stringify(TrackSearchResult[i].name));
-            console.log("Preview Link: " + JSON.stringify(TrackSearchResult[i].preview_url));
-            console.log("Album: " + JSON.stringify(TrackSearchResult[i].album.name));
-            console.log("*************************************************")
-        }
+        let TrackSearchResult = 
+            "*************************************************"+'\r\n'+
+            "Artist: " + JSON.stringify(data.tracks.items[0].artists[0].name)+'\r\n'+
+            "Song: " + JSON.stringify(data.tracks.items[0].name)+'\r\n'+
+            "Preview Link: " + JSON.stringify(data.tracks.items[0].preview_url)+'\r\n'+
+            "Album: " + JSON.stringify(data.tracks.items[0].album.name)+'\r\n'+
+            "*************************************************"
+        console.log(TrackSearchResult)
+        fs.appendFile('log.txt', TrackSearchResult, function (err) {
+            if (err) throw err;
+          });
+          console.log("Saved song info into log.txt");
     });
 }
 
 //_______________  OMDB Function ___________________________________________
-// If no movieTitle title given, provides to the movie, Mr. Nobody.
+// If no movieTitle title given console logs and breaks
 
 function getmovieTitleInfo() {
     var movie = indicator[3];
     if (!movie) {
         console.log("You didn't enter a movie.");
-        break;
+        
     }
 
     var queryUrl = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece";
     request(queryUrl, function(e, resp, data) {
         if (!e && resp.statusCode === 200) {
 
-            console.log("*************************************************")
-            console.log("Title: " + JSON.parse(data).Title);
-            console.log("Year: " + JSON.parse(data).Year);
-            console.log("IMDB Rating: " + JSON.parse(data).imdbRating);
-            console.log("Country: " + JSON.parse(data).Country);
-            console.log("Language: " + JSON.parse(data).Language);
-            console.log("Plot: " + JSON.parse(data).Plot);
-            console.log("Actors: " + JSON.parse(data).Actors);
-            console.log("*************************************************")
+            let omdbResults =
+            "*************************************************"+'\r\n'+
+            "Title: " + JSON.parse(data).Title+'\r\n'+
+            "Year: " + JSON.parse(data).Year+'\r\n'+
+            "IMDB Rating: " + JSON.parse(data).imdbRating+'\r\n'+
+            "Country: " + JSON.parse(data).Country+'\r\n'+
+            "Language: " + JSON.parse(data).Language+'\r\n'+
+            "Plot: " + JSON.parse(data).Plot+'\r\n'+
+            "Actors: " + JSON.parse(data).Actors+'\r\n'+
+            "*************************************************"+'\r\n'
+            console.log(omdbResults);
+            fs.appendFile('log.txt', omdbResults, function (err) {
+                if (err) throw err;
+              });
+              console.log("Saved Movie Info into log.txt");
+            
         }
     });
 }
@@ -167,19 +178,12 @@ function doWhatItSays() {
     fs.readFile("random.txt", "utf8", function(error, data) {
         if (!error) {
             doWhatItSaysResults = data.split(",");
-            songLookup(doWhatItSaysResults[0], doWhatItSaysResults[1]);
+            indicator[3]= doWhatItSaysResults[1];
+            indicator[2]= doWhatItSaysResults[0];
+            whatyoudoing();
         } else {
             console.log("Error occurred" + error);
         }
     });
 };
 
-//________________________ Do What It Says LOG fucntion ___________________
-
-// function log(logResults) {
-//     fs.appendFile("log.txt", logResults, (error) => {
-//         if (error) {
-//             throw error;
-//         }
-//     });
-// }
