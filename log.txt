@@ -20,4 +20,32 @@ Artist: "Halestorm"
 Song: "Here's To Us"
 Preview Link: "https://p.scdn.co/mp3-preview/8e8fe49b1cf5a1d87f0003dc6201279113dd7c4d?cid=640d7f8e26f3493eb89ad18ff6e5b187"
 Album: "The Strange Case of... (Deluxe)"
+**************************************************************************************************
+Artist: "Halestorm"
+Song: "Here's To Us"
+Preview Link: "https://p.scdn.co/mp3-preview/8e8fe49b1cf5a1d87f0003dc6201279113dd7c4d?cid=640d7f8e26f3493eb89ad18ff6e5b187"
+Album: "The Strange Case of... (Deluxe)"
+**************************************************************************************************
+Artist: "Ty Dolla $ign"
+Song: "Or Nah (feat. The Weeknd, Wiz Khalifa and DJ Mustard) - Remix"
+Preview Link: "https://p.scdn.co/mp3-preview/70f126c139847335bc03c756c55b80c99892268e?cid=640d7f8e26f3493eb89ad18ff6e5b187"
+Album: "Or Nah (feat. The Weeknd, Wiz Khalifa and DJ Mustard) [Remix Version]"
+**************************************************************************************************
+Artist: "The Karaoke Channel"
+Song: "The Sign (Originally Performed by Ace of Base) [Karaoke Version]"
+Preview Link: "https://p.scdn.co/mp3-preview/f4b3590097ad447c3c6e2114e36ab73aef6af0b8?cid=640d7f8e26f3493eb89ad18ff6e5b187"
+Album: "The Karaoke Channel - Sing the Sign Like Ace of Base"
+**************************************************************************************************
+Artist: "Ace of Base"
+Song: "The Sign"
+Preview Link: "https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=640d7f8e26f3493eb89ad18ff6e5b187"
+Album: "The Sign (US Album) [Remastered]"
+**************************************************************************************************
+Title: Mr. Nobody
+Year: 2009
+IMDB Rating: 7.9
+Country: Belgium, Germany, Canada, France, USA, UK
+Language: English, Mohawk
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
 *************************************************

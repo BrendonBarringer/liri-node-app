@@ -109,7 +109,8 @@ function songLookup() {
         }
         //Give user song "The Sign" if left empty    
     } else {
-        console.log("You didn't enter a song.");
+        console.log("You didn't enter a song. Defaulting to The Sign");
+        song='The Sign Ace of Base'
         
     }
 
@@ -144,7 +145,8 @@ function songLookup() {
 function getmovieTitleInfo() {
     var movie = indicator[3];
     if (!movie) {
-        console.log("You didn't enter a movie.");
+        console.log("You didn't enter a movie. Have you heard of Mr. Nobody?");
+        movie='Mr. Nobody'
         
     }
 
